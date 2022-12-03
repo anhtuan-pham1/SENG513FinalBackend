@@ -15,6 +15,7 @@ userRoute.patch('/user/:id/unfollow', auth, userController.unfollow)
 
 userRoute.get('/suggestionsUser', auth, userController.suggestionsUser)
 
+userRoute.delete('/user/:id', auth, userController.deleteUser)
 
 
 export default userRoute

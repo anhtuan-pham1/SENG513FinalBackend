@@ -10,13 +10,15 @@ const authController = {
             // hash the password
             const passwordHash = await bcrypt.hash(password, 12)
 
-            const newUser = new Users({
+            let newUser = new Users({
                 username,
                 email,
                 password: passwordHash,
                 gender,
-                token: createToken({ email: email })
+                token: createToken({ email: email }),
+                role: email.includes('@ucalgary.ca') ? "admin" : "student",
             })
+
 
             const accessToken = createAccessToken({ id: newUser._id })
             const refreshToken = createRefreshToken({ id: newUser._id })
