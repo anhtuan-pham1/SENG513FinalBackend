@@ -56,7 +56,7 @@ const postController = {
 
       const posts = await features.query
         .sort("-createdAt")
-        .populate("user likes", "avatar username followers")
+        .populate("user likes", "avatar username fullname followers")
         .populate({
           path: "comments",
           populate: {
@@ -85,7 +85,7 @@ const postController = {
           image,
         }
       )
-        .populate("user likes", "profilePic username")
+        .populate("user likes", "profilePic fullname username")
         .populate({
           path: "comments",
           populate: {
@@ -168,7 +168,7 @@ const postController = {
   getPost: async (req, res) => {
     try {
       const post = await Posts.findById(req.params.id)
-        .populate("user likes", "profilePic username followers")
+        .populate("user likes", "profilePic username fullname followers")
         .populate({
           path: "comments",
           populate: {

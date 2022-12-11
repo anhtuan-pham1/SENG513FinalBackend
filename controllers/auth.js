@@ -6,11 +6,12 @@ import sendConfirmationEmail from "../config/nodemailer.js"
 const authController = {
     register: async (req, res) => {
         try {
-            const { username, email, password, gender } = req.body
+            const { fullname, username, email, password, gender } = req.body
             // hash the password
             const passwordHash = await bcrypt.hash(password, 12)
 
             let newUser = new Users({
+                fullname,
                 username,
                 email,
                 password: passwordHash,
@@ -59,7 +60,7 @@ const authController = {
             const { email, password } = req.body
 
             const user = await Users.findOne({ email: email })
-                .populate("followers following", "avatar username followers following")
+                .populate("followers following", "avatar username fullname followers following")
 
             if (!user) return res.status(400).json({ message: "This email does not exist." })
 
@@ -108,8 +109,9 @@ const authController = {
             await user.save()
 
             res.json({
-                user
+                message: "Verify successfully!"
             })
+
         } catch (err) {
             return res.status(500).json({ message: err.message })
         }

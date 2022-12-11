@@ -7,7 +7,7 @@ const userController = {
     try {
       const users = await Users.find(
         { username: { $regex: `${req.query.username}` } },
-        "username profilePic"
+        "fullname username profilePic"
       ).limit(10);
       res.json({ users });
     } catch (err) {
@@ -29,7 +29,8 @@ const userController = {
   },
   updateUser: async (req, res) => {
     try {
-      const { profilePic, username, gender } = req.body;
+      const { profilePic, fullname, mobile, address, story, website, gender } =
+        req.body;
 
       const uname = await Users.findOne({ username: username });
       if (uname != null)
@@ -41,7 +42,11 @@ const userController = {
         { _id: req.user._id },
         {
           profilePic,
-          username,
+          fullname,
+          mobile,
+          address,
+          story,
+          website,
           gender,
         }
       );

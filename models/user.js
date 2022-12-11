@@ -2,6 +2,12 @@ import pkg from "mongoose";
 const { model, models, Schema, Types } = pkg;
 
 const userSchema = new Schema({
+  fullname: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 25,
+  },
   username: {
     type: String,
     required: true,
@@ -19,6 +25,24 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
+    default: "male",
+  },
+  mobile: {
+    type: String,
+    default: "",
+  },
+  address: {
+    type: String,
+    default: "",
+  },
+  story: {
+    type: String,
+    default: "",
+    maxlength: 200,
+  },
+  website: {
+    type: String,
+    default: "",
   },
   profilePic: {
     type: String,

@@ -106,14 +106,13 @@ const commentController = {
       });
 
       const admin = await Users.findById(req.user._id);
-      console.log(admin);
+
       if (admin.role == "admin") {
         comment = await Comments.findByIdAndDelete({
           _id: req.params.id,
         });
       }
 
-      console.log(admin);
       await Posts.findOneAndUpdate(
         { _id: comment.postId },
         {
