@@ -6,7 +6,7 @@ import sendConfirmationEmail from "../config/nodemailer.js"
 const authController = {
     register: async (req, res) => {
         try {
-            const { fullname, username, email, password, gender } = req.body
+            const { fullname, username, email, password, gender, profilePic } = req.body
             // hash the password
             const passwordHash = await bcrypt.hash(password, 12)
 
@@ -18,6 +18,7 @@ const authController = {
                 gender,
                 token: createToken({ email: email }),
                 role: email.includes('@ucalgary.ca') ? "admin" : "student",
+                profilePic
             })
 
 
