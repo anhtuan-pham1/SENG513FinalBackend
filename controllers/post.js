@@ -10,7 +10,7 @@ class APIfeatures {
 
   paginating() {
     const page = this.queryString.page * 1 || 1;
-    const limit = this.queryString.limit * 1 || 20;
+    const limit = this.queryString.limit * 1 || 200;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;
@@ -192,7 +192,7 @@ const postController = {
       const user = await Users.findById(req.user, "_id following");
       const newArr = [...user.following, user._id];
 
-      const num = req.query.num || 20;
+      const num = req.query.num || 200;
 
       const posts = await Posts.aggregate([
         { $match: { user: { $nin: newArr } } },
