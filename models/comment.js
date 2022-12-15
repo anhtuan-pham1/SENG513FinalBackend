@@ -10,11 +10,11 @@ const commentSchema = new Schema({
     reply: Types.ObjectId,
     likes: [{
         type: Types.ObjectId,
-        ref: 'user'
+        ref: 'Users'
     }],
     user: {
         type: Types.ObjectId,
-        ref: 'user'
+        ref: 'Users'
     },
     postId: Types.ObjectId,
     postUserId: Types.ObjectId

@@ -29,7 +29,7 @@ const userController = {
   },
   updateUser: async (req, res) => {
     try {
-      const { profilePic, fullname, mobile, address, story, website, gender } =
+      const { profilePic, fullname, mobile, address, story, website, gender, username } =
         req.body;
 
       const uname = await Users.findOne({ username: username });
@@ -48,6 +48,7 @@ const userController = {
           story,
           website,
           gender,
+          username
         }
       );
 
